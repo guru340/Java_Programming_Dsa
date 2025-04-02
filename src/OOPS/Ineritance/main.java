@@ -31,8 +31,9 @@ those parts of the object defined by the superclass.
 //        System.out.println(box5.w);
 
 
-        BoxPrice box6=new BoxPrice(12,12,4);
-        System.out.println(box6.cost);
+//        BoxPrice box6=new BoxPrice(12,12,4);
+//        System.out.println(box6.cost);
+        box.greeting();
     }
 }
 
