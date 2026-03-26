@@ -1,7 +1,7 @@
 package sorting;
 
 import java.util.Arrays;
-class selection{
+public class selection{
     public static void main(String[] args) {
            int []arr={1,3,4,5,2};
            selectionsort(arr);
@@ -15,12 +15,12 @@ class selection{
                swap(arr,maxIndex,last);
            }
        }
-       static void swap(int []arr,int first,int second){
+       public static void swap(int[] arr, int first, int second){
            int temp=arr[first];
            arr[first]=arr[second];
            arr[second]=temp;
        }
-       static int getmaxIndex(int []arr,int start,int end){
+       public static int getmaxIndex(int[] arr, int start, int end){
            int max=start;
            for(int i=start;i<=end;i++){
                if(arr[i]>arr[max]){

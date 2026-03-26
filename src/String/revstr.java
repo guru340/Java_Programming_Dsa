@@ -1,6 +1,6 @@
 package String;
 
-public class revstr {
+public class  revstr {
     public static void main(String[] args) {
         System.out.println(reverseString("Mayank"));
     }

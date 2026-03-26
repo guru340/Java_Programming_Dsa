@@ -7,7 +7,7 @@
 
 public class decimaltobinary {
     public static void main(String[] args) {
-    int n=1;
+    int n=101;
     binary(n);
 
     }

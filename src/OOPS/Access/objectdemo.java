@@ -2,9 +2,12 @@ package OOPS.Access;
 
 public class objectdemo {
     int num;
+    float num2;
 
-    public objectdemo(int num) {
+    public objectdemo(int num,float num2) {
+
         this.num = num;
+        this.num2=num2;
     }
 
     @Override
@@ -31,4 +34,13 @@ public class objectdemo {
         super();
     }
 
+
+    public static void main(String[] args) {
+        objectdemo obj=new objectdemo(34,65);
+        objectdemo obj2=new objectdemo(56,58);
+        if (obj.equals(obj2 )){
+            System.out.println("object 2 is equal to obj");
+        }
+//        System.out.println(obj.hashCode());
+    }
 }

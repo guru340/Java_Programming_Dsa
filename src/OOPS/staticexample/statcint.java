@@ -3,7 +3,7 @@ package OOPS.staticexample;
 public class statcint {
     static int num=9;
     static int num2;
-// it will only once, when the first obj is create i.e when the class is loade for staticblock
+// it will only once, when the first obj is create i.e when the class is loads for staticblock
     static {
         System.out.println("I am statc block");
         num2=num*6;

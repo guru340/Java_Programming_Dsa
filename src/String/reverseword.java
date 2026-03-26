@@ -2,7 +2,7 @@ package String;
 
 public class reverseword {
     public static void main(String[] args) {
-        System.out.println(reverseWords("Mayank.Riya"));
+        System.out.println(reverseWords("Mayank.Sonal"));
     }
 
     private static String reverseWords(String s) {

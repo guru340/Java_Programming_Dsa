@@ -17,7 +17,8 @@ Key difference between a class and an interface: a class can maintain state info
 Using interface, you can specify a set of methods that can be implemented by one or more classes.
 Although they are similar to abstract classes, interfaces have an additional capability:
 A class can implement more than one interface. By contrast, a class can only inherit a single superclass
-(abstract or otherwise).
+(abstract or otherwise)..
+
 
 Using the keyword interface, you can fully abstract a class’ interface from its implementation.
 That is, using interface, you can specify what a class must do, but not how it does it.
@@ -25,7 +26,7 @@ That is, using interface, you can specify what a class must do, but not how it d
 Interfaces are syntactically similar to classes, but they lack instance variables, and, as a general rule,
 their methods are declared without any body.
 
-By providing the interface keyword, Java allows you to fully utilize the “one interface, multiple methods”
+B y providing the interface keyword, Java allows you to fully utilize the “one interface, multiple methods”
 aspect of polymorphism.
 
 NOTE: Interfaces are designed to support dynamic method resolution at run time.
