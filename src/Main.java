@@ -1,63 +1,70 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Main {
+    static final long MOD = 676767677L;
 
-    static final int MAX_N = 100000 + 14;
-    static final int LG = 17;
-
-    static int n, q;
-    static int[][] seg = new int[MAX_N][LG];
-    static int[] arr = new int[MAX_N];
-
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        int t = Integer.parseInt(br.readLine().trim());
+        StringBuilder sb = new StringBuilder();
 
-        n = Integer.parseInt(br.readLine());
+        while (t-- > 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            long x = Long.parseLong(st.nextToken());
+            long y = Long.parseLong(st.nextToken());
 
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-            seg[i][0] = arr[i];
-        }
+            if (x == 0 && y == 0) {
 
-        // Build Sparse Table
-        for (int k = 1; k < LG; k++) {
-            for (int i = 0; i + (1 << k) <= n; i++) {
-                seg[i][k] = Math.min(
-                        seg[i][k - 1],
-                        seg[i + (1 << (k - 1))][k - 1]
-                );
+                sb.append("1\n\n");
+                continue;
+            }
+
+            if (x == 0) {
+
+                long divCount = countDivisors(y) % MOD;
+                sb.append(divCount).append('\n');
+
+                for (long i = 0; i < y; i++) sb.append("-1 ");
+                sb.append('\n');
+
+            } else if (y == 0) {
+
+
+                long divCount = countDivisors(x) % MOD;
+                sb.append(divCount).append('\n');
+
+                for (long i = 0; i < x; i++) sb.append("1 ");
+                sb.append('\n');
+
+            } else {
+
+                sb.append(1).append('\n');
+                long S = x - y;
+                if (S >= 0) {
+
+                    for (long i = 0; i < x; i++) sb.append("1 ");
+                    for (long i = 0; i < y; i++) sb.append("-1 ");
+                } else {
+
+                    for (long i = 0; i < y; i++) sb.append("-1 ");
+                    for (long i = 0; i < x; i++) sb.append("1 ");
+                }
+                sb.append('\n');
             }
         }
 
-        q = Integer.parseInt(br.readLine());
-        StringBuilder output = new StringBuilder();
+        System.out.print(sb);
+    }
 
-        while (q-- > 0) {
-
-            st = new StringTokenizer(br.readLine());
-            int l = Integer.parseInt(st.nextToken());
-            int r = Integer.parseInt(st.nextToken());
-
-            r++; // make it exclusive
-            int len = r - l;
-
-            int k = 0;
-            while ((1 << (k + 1)) <= len) {
-                k++;
+    static long countDivisors(long n) {
+        long count = 0;
+        for (long i = 1; i * i <= n; i++) {
+            if (n % i == 0) {
+                count++;
+                if (i != n / i) count++;
             }
-
-            int ans = Math.min(
-                    seg[l][k],
-                    seg[r - (1 << k)][k]
-            );
-
-            output.append(ans).append('\n');
         }
-
-        System.out.print(output);
+        return count;
     }
 }
