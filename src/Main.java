@@ -1,70 +1,90 @@
 import java.util.*;
 import java.io.*;
 
+import java.util.*;
+
 public class Main {
-    static final long MOD = 676767677L;
+    static int seg[];
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine().trim());
-        StringBuilder sb = new StringBuilder();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        while (t-- > 0) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            long x = Long.parseLong(st.nextToken());
-            long y = Long.parseLong(st.nextToken());
+        int n = sc.nextInt();
+        int q = sc.nextInt();
 
-            if (x == 0 && y == 0) {
+        seg = new int[4 * n];
+        int[] arr = new int[n];
 
-                sb.append("1\n\n");
-                continue;
-            }
-
-            if (x == 0) {
-
-                long divCount = countDivisors(y) % MOD;
-                sb.append(divCount).append('\n');
-
-                for (long i = 0; i < y; i++) sb.append("-1 ");
-                sb.append('\n');
-
-            } else if (y == 0) {
-
-
-                long divCount = countDivisors(x) % MOD;
-                sb.append(divCount).append('\n');
-
-                for (long i = 0; i < x; i++) sb.append("1 ");
-                sb.append('\n');
-
-            } else {
-
-                sb.append(1).append('\n');
-                long S = x - y;
-                if (S >= 0) {
-
-                    for (long i = 0; i < x; i++) sb.append("1 ");
-                    for (long i = 0; i < y; i++) sb.append("-1 ");
-                } else {
-
-                    for (long i = 0; i < y; i++) sb.append("-1 ");
-                    for (long i = 0; i < x; i++) sb.append("1 ");
-                }
-                sb.append('\n');
-            }
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
         }
 
-        System.out.print(sb);
+        build(arr, 0, n - 1, 0);
+
+        while (q-- > 0) {
+            int type = sc.nextInt();
+
+            if (type == 1) {
+                int i = sc.nextInt();
+                int v = sc.nextInt();
+                update(0, n - 1, 0, i, v);
+            } else {
+                int l = sc.nextInt();
+                int r = sc.nextInt();
+
+                int ans = queries(l, r - 1, 0, n - 1, 0);
+                System.out.println(ans);
+            }
+        }
     }
 
-    static long countDivisors(long n) {
-        long count = 0;
-        for (long i = 1; i * i <= n; i++) {
-            if (n % i == 0) {
-                count++;
-                if (i != n / i) count++;
-            }
+    private static void build(int[] arr, int l, int r, int idx) {
+        if (l == r) {
+            seg[idx] = arr[l];
+            return;
         }
-        return count;
+
+        int mid = (l + r) / 2;
+
+        build(arr, l, mid, 2 * idx + 1);
+        build(arr, mid + 1, r, 2 * idx + 2);
+
+        seg[idx] = Math.min(seg[2 * idx + 1], seg[2 * idx + 2]);
+    }
+
+    private static int queries(int l, int r, int start, int end, int idx) {
+        // no overlap
+        if (r < start || end < l) {
+            return Integer.MAX_VALUE;  // FIXED
+        }
+
+        // complete overlap
+        if (l <= start && end <= r) {  // FIXED
+            return seg[idx];
+        }
+
+        int mid = (start + end) / 2;
+
+        int left = queries(l, r, start, mid, 2 * idx + 1);
+        int right = queries(l, r, mid + 1, end, 2 * idx + 2);
+
+        return Math.min(left, right);
+    }
+
+    private static void update(int start, int end, int idx, int pos, int val) {
+        if (start == end) {
+            seg[idx] = val;
+            return;
+        }
+
+        int mid = (start + end) / 2;
+
+        if (pos <= mid) {
+            update(start, mid, 2 * idx + 1, pos, val);
+        } else {
+            update(mid + 1, end, 2 * idx + 2, pos, val);
+        }
+
+        seg[idx] = Math.min(seg[2 * idx + 1], seg[2 * idx + 2]);
     }
 }
