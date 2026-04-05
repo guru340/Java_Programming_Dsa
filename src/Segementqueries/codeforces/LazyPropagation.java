@@ -1,8 +1,8 @@
-
+package Segementqueries.codeforces;
 
 import java.util.*;
 
-public class Main {
+public class LazyPropagation {
     static long[] seg;
     static long[] lazy;
 
