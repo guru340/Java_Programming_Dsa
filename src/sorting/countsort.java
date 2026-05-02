@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class countsort {
+    public class countsort {
     public static void countsortHas(int[]arr){
         if(arr == null || arr.length <= 1) {
             return;
