@@ -108,7 +108,7 @@ public class AVL {
     }
 
 
-    public boolean balanced(){
+    public boolean balance(){
         return balanced(root);
     }
     private boolean balanced(Node node){
