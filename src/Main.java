@@ -2,15 +2,21 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int count=0;
-        int n=sc.nextInt();
-        for(int i=1;i<=n;i++){
-            if(i==2 || i==5 || i==6 || i==9){
-                count++;
-            }
-        }
 
-        System.out.println(count);
+}
+    public String processStr(String s) {
+        StringBuilder s1=new StringBuilder(s);
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='#'){
+                s1.append(s.charAt(i));
+            } else if (s.charAt(i)=='*') {
+                s1.deleteCharAt(s.length());
+            } else if (s.charAt(i)=='%') {
+                s1.reverse();
+            }
+            s1.append(s);
+        }
+        return s1.toString();
     }
+
 }
