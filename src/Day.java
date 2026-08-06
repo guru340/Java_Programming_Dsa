@@ -33,7 +33,7 @@ public class Day {
 //                System.out.println("You entered the wrong input");
 //                break;
 //        }
-        System.out.println(reverseWords("Let's take LeetCode contest"));
+//        System.out.println(reverseWords("Let's take LeetCode contest"));
 
     }
 //    public static String prime(String str){
@@ -65,9 +65,8 @@ public class Day {
 //        return true;
 //    }
 
-    public static int beautifulSubstrings(String s, int k) {
 
-    }
+
 
 
 }
